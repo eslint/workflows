@@ -10,4 +10,4 @@ This repository is intended exclusively for ESLint repositories. It is tailored 
 
 ## License
 
-MIT
+Apache 2.0
