@@ -2,7 +2,7 @@ name: stale
 
 on:
     schedule:
-        - cron: "31 22 * * *"
+        - cron: "31 22 * * *" # Runs every day at 10:31 PM UTC
 
     workflow_call:
         secrets:
