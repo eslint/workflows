@@ -1,0 +1,32 @@
+name: add-to-triage
+
+on:
+    issues:
+        types:
+            - opened
+            - reopened
+            - transferred
+
+    pull_request:
+        types:
+            - opened
+            - reopened
+
+    workflow_call:
+        secrets:
+            PROJECT_BOT_TOKEN:
+                required: true
+                description: Token for the project bot to add issues and pull requests to the project triage board
+
+jobs:
+    add-to-triage:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Add to triage
+              uses: actions/add-to-project@v1.0.2
+              with:
+                  github-token: ${{ secrets.PROJECT_BOT_TOKEN }}
+                  project-url: https://github.com/orgs/eslint/projects/3                  
+                  labeled: "triage:no" # Add all issues and pull requests that don't include "triage:no" label.
+                  label-operator: NOT

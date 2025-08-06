@@ -1,0 +1,5 @@
+# Editor and IDE specific files
+.vscode
+*.code-workspace
+.cursor
+.idea
