@@ -6,7 +6,7 @@ on:
 
     workflow_call:
         secrets:
-            TOKEN:
+            token:
                 required: true
                 description: GitHub token to use for the workflow
 
@@ -22,7 +22,7 @@ jobs:
             - name: Mark stale issues and pull requests
               uses: actions/stale@v9
               with:
-                  repo-token: ${{ secrets.TOKEN }}
+                  repo-token: ${{ secrets.token }}
                   days-before-issue-stale: 30
                   days-before-pr-stale: 10
                   days-before-close: 7
