@@ -1,0 +1,81 @@
+name: update-readme
+
+on:
+    schedule:
+        - cron: "0 8 * * *" # Runs every day at 08:00 AM UTC
+
+    workflow_dispatch:
+
+jobs:
+    update-readme:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@v5
+            #  with:
+            #      token: ${{ secrets.WORKFLOW_PUSH_BOT_TOKEN }}
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "lts/*"
+
+            - name: Update README with latest sponsor data
+              run: |
+                  node --input-type=module -e "
+                      //-----------------------------------------------------------------------------
+                      // Import
+                      //-----------------------------------------------------------------------------
+
+                      import { readFileSync, writeFileSync } from 'node:fs';
+
+                      //-----------------------------------------------------------------------------
+                      // Data
+                      //-----------------------------------------------------------------------------
+
+                      const SPONSORS_URL = 'https://raw.githubusercontent.com/eslint/eslint.org/main/includes/sponsors.md';
+                      const README_FILE_PATH = './README.md';
+
+                      //-----------------------------------------------------------------------------
+                      // Main
+                      //-----------------------------------------------------------------------------
+
+                      const res = await fetch(SPONSORS_URL);
+                      const allSponsors = await res.text();
+
+                      const readme = readFileSync(README_FILE_PATH, "utf8"); // Read README file
+
+                      let newReadme = readme.replace(
+                    	  /<!--sponsorsstart-->[\w\W]*?<!--sponsorsend-->/u,
+                          `<!--sponsorsstart-->\n\n${allSponsors}\n<!--sponsorsend-->`,
+                      );
+
+                      // replace multiple consecutive blank lines with just one blank line
+                      newReadme = newReadme.replace(/(?<=^|\n)\n{2,}/gu, "\n");
+
+                      // output to the files
+                      writeFileSync(README_FILE_PATH, newReadme, "utf8");
+
+                      console.log(newReadme);
+                  "
+
+            # - name: Setup Git
+            #  run: |
+            #      git config user.name "GitHub Actions Bot"
+            #      git config user.email "<eslint@googlegroups.com>"
+
+            #- name: Commit README
+            #  run: |
+            #      if [ -z "$(git status --porcelain)" ]; then 
+            #          echo "Data did not change."
+            #      else
+            #          echo "Data changed!"
+
+                      # commit the result
+            #          git add README.md
+            #          git commit -m "docs: Update README sponsors"
+
+                      # push back to source control
+            #          git push origin HEAD
+            #      fi
