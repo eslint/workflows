@@ -9,5 +9,11 @@
       matchPackageNames: ["espree", "eslint-scope", "eslint-visitor-keys"],
       minimumReleaseAge: null, // Don't wait for these packages
     },
+    {
+      description: "Update ESLint dev dependencies together.",
+      groupName: "eslint-dev",
+      matchPackageNames: ["eslint", "eslint-config-eslint"],
+      minimumReleaseAge: null, // Don't wait for these packages
+    },
   ],
 }
