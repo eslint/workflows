@@ -23,7 +23,7 @@ jobs:
 
             - name: Update README with latest sponsor data
               run: |
-                  node --input-type=module -e "
+                  node --input-type=module - <<'JS'
                       //-----------------------------------------------------------------------------
                       // Import
                       //-----------------------------------------------------------------------------
@@ -61,7 +61,7 @@ jobs:
                           // output to the files
                           writeFileSync(readmeFilePath, newReadme, 'utf8');
                       });
-                  "
+                  JS
 
             - name: Setup Git
               run: |
