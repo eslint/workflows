@@ -70,6 +70,9 @@ jobs:
 
             - name: Commit README
               run: |
+                  # Unmatched patterns are dropped to avoid git errors
+                  shopt -s nullglob
+              
                   if [ -z "$(git status --porcelain)" ]; then 
                       echo "Data did not change."
                   else
