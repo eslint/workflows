@@ -6,6 +6,12 @@ on:
 
     workflow_dispatch:
 
+    workflow_call:
+        secrets:
+            workflow_push_bot_token:
+                required: true
+                description: Token for the project bot to add issues and pull requests to the project triage board
+
 jobs:
     update-readme:
         runs-on: ubuntu-latest
@@ -14,7 +20,7 @@ jobs:
             - name: Check out repo
               uses: actions/checkout@v5
               with:
-                  token: ${{ secrets.WORKFLOW_PUSH_BOT_TOKEN }}
+                  token: ${{ secrets.workflow_push_bot_token }}
 
             - name: Set up Node.js
               uses: actions/setup-node@v4
