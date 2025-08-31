@@ -13,8 +13,8 @@ jobs:
         steps:
             - name: Check out repo
               uses: actions/checkout@v5
-            #  with:
-            #      token: ${{ secrets.WORKFLOW_PUSH_BOT_TOKEN }}
+              with:
+                  token: ${{ secrets.WORKFLOW_PUSH_BOT_TOKEN }}
 
             - name: Set up Node.js
               uses: actions/setup-node@v4
@@ -63,22 +63,22 @@ jobs:
                       });
                   "
 
-            # - name: Setup Git
-            #  run: |
-            #      git config user.name "GitHub Actions Bot"
-            #      git config user.email "<eslint@googlegroups.com>"
+            - name: Setup Git
+              run: |
+                  git config user.name "GitHub Actions Bot"
+                  git config user.email "<eslint@googlegroups.com>"
 
-            #- name: Commit README
-            #  run: |
-            #      if [ -z "$(git status --porcelain)" ]; then 
-            #          echo "Data did not change."
-            #      else
-            #          echo "Data changed!"
+            - name: Commit README
+              run: |
+                  if [ -z "$(git status --porcelain)" ]; then 
+                      echo "Data did not change."
+                  else
+                      echo "Data changed!"
 
                       # commit the result
-            #          git add README.md
-            #          git commit -m "docs: Update README sponsors"
+                      git add README.md
+                      git commit -m "docs: Update README sponsors"
 
                       # push back to source control
-            #          git push origin HEAD
-            #      fi
+                      git push origin HEAD
+                  fi
