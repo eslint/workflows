@@ -38,7 +38,7 @@ jobs:
                       const PACKAGES_README_FILE_PATHS = existsSync('./packages')
                           ? readdirSync('./packages').map(dir => `./packages/${dir}/README.md`)
                           : [];
-                      const README_FILE_PATHS = ["./README.md", ...PACKAGES_README_FILE_PATHS];
+                      const README_FILE_PATHS = ['./README.md', ...PACKAGES_README_FILE_PATHS];
 
                       //-----------------------------------------------------------------------------
                       // Main
@@ -47,18 +47,20 @@ jobs:
                       const response = await fetch(SPONSORS_URL);
                       const allSponsors = await response.text();
 
-                      const readme = readFileSync(README_FILE_PATH, 'utf8'); // Read README file
+                      README_FILE_PATHS.forEach(readmeFilePath => {
+                          const readme = readFileSync(readmeFilePath, 'utf8'); // Read README file
 
-                      let newReadme = readme.replace(
-                    	  /<!--sponsorsstart-->[\s\S]*?<!--sponsorsend-->/u,
-                          `<!--sponsorsstart-->\n\n${allSponsors}\n<!--sponsorsend-->`,
-                      );
+                          let newReadme = readme.replace(
+                    	      /<!--sponsorsstart-->[\s\S]*?<!--sponsorsend-->/u,
+                              `<!--sponsorsstart-->\n\n${allSponsors}\n<!--sponsorsend-->`,
+                          );
 
-                      // replace multiple consecutive blank lines with just one blank line
-                      newReadme = newReadme.replace(/(?<=^|\n)\n{2,}/gu, '\n');
+                          // replace multiple consecutive blank lines with just one blank line
+                          newReadme = newReadme.replace(/(?<=^|\n)\n{2,}/gu, '\n');
 
-                      // output to the files
-                      writeFileSync(README_FILE_PATH, newReadme, 'utf8');
+                          // output to the files
+                          writeFileSync(readmeFilePath, newReadme, 'utf8');
+                      });
                   "
 
             # - name: Setup Git
