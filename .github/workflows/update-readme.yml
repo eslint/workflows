@@ -10,7 +10,7 @@ on:
         secrets:
             workflow_push_bot_token:
                 required: true
-                description: Token for the project bot to add issues and pull requests to the project triage board
+                description: Token for the workflow bot to push changes
 
 jobs:
     update-readme:
@@ -78,8 +78,8 @@ jobs:
               run: |
                   # Unmatched patterns are dropped to avoid git errors
                   shopt -s nullglob
-              
-                  if [ -z "$(git status --porcelain)" ]; then 
+
+                  if [ -z "$(git status --porcelain)" ]; then
                       echo "Data did not change."
                   else
                       echo "Data changed!"
