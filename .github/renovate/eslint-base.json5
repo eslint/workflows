@@ -8,7 +8,9 @@
       matchPackagePrefixes: ["@eslint/"],
       matchPackageNames: ["espree", "eslint-scope", "eslint-visitor-keys"],
       minimumReleaseAge: null, // Don't wait for these packages
-      matchUpdateTypes: ["major", "minor", "patch"],
+      "major": {"enabled": true},
+      "minor": {"enabled": true},
+      "patch": {"enabled": true},
     },
     {
       description: "Update ESLint dev dependencies together.",
