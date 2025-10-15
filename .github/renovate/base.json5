@@ -6,7 +6,7 @@
     ":semanticCommitScopeDisabled",
   ],
   ignorePresets: [":semanticPrefixFixDepsChoreOthers"],
-  labels: ["dependencies"],
+  labels: ["dependencies", "triage:no"],
 
   // Wait well over npm's three day window for any new package as a precaution against malicious publishes
   // https://docs.npmjs.com/policies/unpublish/#packages-published-less-than-72-hours-ago
