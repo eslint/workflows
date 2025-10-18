@@ -62,7 +62,7 @@ jobs:
 
             - name: npm install
               run: |
-                  npm install ./eslint-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  npm install ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
 
     yarn-v1-install:
         needs: build-tarball
@@ -82,7 +82,7 @@ jobs:
 
             - name: yarn add
               run: |
-                  yarn add ./eslint-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  yarn add ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
 
     yarn-install:
         needs: build-tarball
@@ -109,7 +109,7 @@ jobs:
               run: |
                   corepack use yarn@latest
                   yarn init -p
-                  yarn add ./eslint-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  yarn add ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
               env:
                   YARN_ENABLE_IMMUTABLE_INSTALLS: 0 # Allow installs to modify lockfile
 
@@ -140,7 +140,7 @@ jobs:
                   auto-install-peers=true
                   node-linker=hoisted
                   EOT
-                  pnpm add ./eslint-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  pnpm add ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
 
     bun-install:
         needs: build-tarball
@@ -158,4 +158,4 @@ jobs:
 
             - name: bun install
               run: |
-                  bun install ./eslint-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  bun install ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
