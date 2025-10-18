@@ -24,7 +24,7 @@ jobs:
             - name: Bun install, build, and test
               run: |
                   bun install
-                  bun run --bun build --if-present
-                  bun run --bun test --if-present
+                  bun run --if-present --bun build
+                  bun run --if-present --bun test
               env:
                   CI: true
