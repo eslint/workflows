@@ -15,7 +15,6 @@
       groupName: "eslint-dev",
       matchPackageNames: ["eslint", "eslint-config-eslint"],
       minimumReleaseAge: null, // Don't wait for these packages
-      matchUpdateTypes: ["major", "minor", "patch"],
     },
     {
       "matchDepTypes": ["devDependencies"],
