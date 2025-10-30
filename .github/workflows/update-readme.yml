@@ -28,10 +28,10 @@ jobs:
                   node-version: "lts/*"
 
             - name: Copy update-readme script from workflows repository
-              run: curl --create-dirs -fsSL https://raw.githubusercontent.com/eslint/workflows/main/tools/update-readme.js -o tools/update-readme.js
+              run: curl --create-dirs -fsSL https://raw.githubusercontent.com/eslint/workflows/main/tools/update-readme.js -o .shared-workflows/tools/update-readme.js
 
             - name: Update README with latest sponsor data
-              run: node tools/update-readme.js
+              run: node .shared-workflows/tools/update-readme.js
 
             - name: Setup Git
               run: |
