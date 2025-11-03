@@ -5,4 +5,4 @@
 .idea
 
 # Automatically generated files by GitHub Actions workflow
-.shared-workflows/tools/update-readme.js
+/.shared-workflows
