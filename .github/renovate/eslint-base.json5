@@ -5,7 +5,7 @@
     {
       description: "Update non-major dev-dependencies together.",
       groupName: "non-major dev-dependencies",
-      groupSlug: "non-major-dev-deps"
+      groupSlug: "non-major-dev-deps",
       matchDepTypes: ["devDependencies"],
       matchUpdateTypes: ["minor", "patch"],
     },
