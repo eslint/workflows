@@ -1,0 +1,30 @@
+name: ci-bun
+
+on:
+    workflow_call:
+
+jobs:
+    ci-bun:
+        strategy:
+            matrix:
+                os: [windows-latest, macOS-latest, ubuntu-latest]
+                bun: [latest]
+
+        runs-on: ${{ matrix.os }}
+
+        steps:
+            - name: Check out repo
+              uses: actions/checkout@v6
+
+            - name: Set up Bun
+              uses: oven-sh/setup-bun@v2
+              with:
+                  bun-version: ${{ matrix.bun }}
+
+            - name: Bun install, build, and test
+              run: |
+                  bun install
+                  bun run --if-present --bun build
+                  bun run --if-present --bun test
+              env:
+                  CI: true

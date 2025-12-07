@@ -3,3 +3,6 @@
 *.code-workspace
 .cursor
 .idea
+
+# Automatically generated files by GitHub Actions workflow
+/.shared-workflows

@@ -18,20 +18,20 @@ jobs:
 
         steps:
             - name: Check out repo
-              uses: actions/checkout@v5
+              uses: actions/checkout@v6
               with:
                   token: ${{ secrets.workflow_push_bot_token }}
 
             - name: Set up Node.js
-              uses: actions/setup-node@v5
+              uses: actions/setup-node@v6
               with:
                   node-version: "lts/*"
 
             - name: Copy update-readme script from workflows repository
-              run: curl --create-dirs -fsSL https://raw.githubusercontent.com/eslint/workflows/main/tools/update-readme.js -o tools/update-readme.js
+              run: curl --create-dirs -fsSL https://raw.githubusercontent.com/eslint/workflows/main/tools/update-readme.js -o .shared-workflows/tools/update-readme.js
 
             - name: Update README with latest sponsor data
-              run: node tools/update-readme.js
+              run: node .shared-workflows/tools/update-readme.js
 
             - name: Setup Git
               run: |
