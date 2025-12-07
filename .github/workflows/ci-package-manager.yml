@@ -15,9 +15,6 @@ jobs:
     build-tarball:
         runs-on: ubuntu-latest
 
-        outputs:
-            version: ${{ steps.get_version.outputs.version }}
-
         steps:
             - name: Check out repo
               uses: actions/checkout@v6
@@ -31,18 +28,14 @@ jobs:
               run: npm install
 
             - name: Build tarball
-              run: npm pack
+              run: "node -e \"const hasWs = 'workspaces' in require('./package.json'); process.exit(hasWs ? 0 : 1)\" && npm pack -ws || npm pack"
 
             - name: Upload build artifact
               uses: actions/upload-artifact@v5
               with:
                   name: build
-                  path: eslint-*.tgz
+                  path: "*.tgz"
                   retention-days: 1
-
-            - name: Get version
-              id: get_version
-              run: echo "version=$(jq -r '.version' package.json)" >> "$GITHUB_OUTPUT"
 
     npm-install:
         needs: build-tarball
@@ -62,7 +55,7 @@ jobs:
 
             - name: npm install
               run: |
-                  npm install ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  npm install ./*.tgz -D
 
     yarn-v1-install:
         needs: build-tarball
@@ -82,7 +75,7 @@ jobs:
 
             - name: yarn add
               run: |
-                  yarn add ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  yarn add ./*.tgz -D
 
     yarn-install:
         needs: build-tarball
@@ -109,7 +102,7 @@ jobs:
               run: |
                   corepack use yarn@latest
                   yarn init -p
-                  yarn add ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  yarn add ./*.tgz -D
               env:
                   YARN_ENABLE_IMMUTABLE_INSTALLS: 0 # Allow installs to modify lockfile
 
@@ -140,7 +133,7 @@ jobs:
                   auto-install-peers=true
                   node-linker=hoisted
                   EOT
-                  pnpm add ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  pnpm add ./*.tgz -D
 
     bun-install:
         needs: build-tarball
@@ -158,4 +151,4 @@ jobs:
 
             - name: bun install
               run: |
-                  bun install ./eslint-*-${{ needs.build-tarball.outputs.version }}.tgz -D
+                  bun install ./*.tgz -D
