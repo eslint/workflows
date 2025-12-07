@@ -28,7 +28,7 @@ jobs:
               run: npm install
 
             - name: Build tarball
-              run: "node -e \"const hasWs = 'workspaces' in require('./package.json'); process.exit(hasWs ? 0 : 1)\" && npm pack --workspaces || npm pack"
+              run: npm pack --workspace packages 2>/dev/null || npm pack
 
             - name: Upload build artifact
               uses: actions/upload-artifact@v5
