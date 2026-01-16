@@ -29,5 +29,10 @@
       addLabels: ["deps:npm"],
       matchManagers: ["npm"],
     },
+    {
+      description: "pin prettier",
+      matchPackageNames: ["prettier"],
+      rangeStrategy: "pin",
+    }
   ],
 }
