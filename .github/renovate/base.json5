@@ -30,7 +30,7 @@
       matchManagers: ["npm"],
     },
     {
-      description: "pin prettier",
+      description: "Pin prettier",
       matchPackageNames: ["prettier"],
       rangeStrategy: "pin",
     },
