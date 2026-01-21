@@ -32,7 +32,7 @@
     {
       description: "Pin prettier",
       matchPackageNames: ["prettier"],
-      rangeStrategy: "pin",
+      rangeStrategy: "pin", // TODO
     },
   ],
 }
