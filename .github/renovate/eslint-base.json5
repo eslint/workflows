@@ -8,6 +8,7 @@
       groupSlug: "non-major-dev-deps",
       matchDepTypes: ["devDependencies"],
       matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
     },
     {
       description: "Update ESLint packages together.",
