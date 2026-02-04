@@ -16,7 +16,6 @@
       description: "Use the deps:actions label for github-action manager updates (this means Renovate's github-action manager).",
       addLabels: ["deps:actions"],
       matchManagers: ["github-actions"],
-      automerge: true,
     },
     {
       description: "Pin 3rd-party actions",
@@ -24,7 +23,6 @@
       addLabels: ["deps:actions"],
       matchManagers: ["github-actions"],
       matchPackageNames: ["!actions/**", "!github/**"],
-      automerge: true,
     },
     {
       description: "Use the deps:npm label for npm manager packages (this means Renovate's npm manager).",
