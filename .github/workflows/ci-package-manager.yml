@@ -10,6 +10,12 @@ name: ci-package-manager
 
 on:
     workflow_call:
+        inputs:
+            pnpm_approve_builds:
+                required: false
+                description: The value to use for `pnpm approve-builds` when installing with pnpm. If not provided, the command will be skipped.
+                default: ''
+                type: string
 
 jobs:
     build-tarball:
@@ -127,13 +133,16 @@ jobs:
               with:
                   node-version: "lts/*"
 
+            - name: pnpm approve-builds
+              if: inputs.pnpm_approve_builds != ''
+              run: pnpm approve-builds ${{ inputs.pnpm_approve_builds }}
+
             - name: pnpm add
               run: |
                   cat > .npmrc <<EOT
                   auto-install-peers=true
                   node-linker=hoisted
                   EOT
-                  pnpm approve-builds --all
                   pnpm add ./*.tgz -D
 
     bun-install:
