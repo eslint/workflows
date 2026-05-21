@@ -139,9 +139,9 @@ jobs:
                   auto-install-peers=true
                   node-linker=hoisted
                   EOT
-                  pnpm add ${PNPM_ALLOW_BUILD_ARG} ./*.tgz -D
+                  pnpm add ${PNPM_ALLOW_BUILD_ARGS} ./*.tgz -D
               env:
-                  PNPM_ALLOW_BUILD_ARG: ${{ case(inputs.pnpm_allow_build_args != '', format('--allow-build={0}', inputs.pnpm_allow_build_args), '') }}
+                  PNPM_ALLOW_BUILD_ARGS: ${{ case(inputs.pnpm_allow_build_args != '', format('--allow-build={0}', inputs.pnpm_allow_build_args), '') }}
 
     bun-install:
         needs: build-tarball
