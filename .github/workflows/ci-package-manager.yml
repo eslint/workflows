@@ -11,10 +11,9 @@ name: ci-package-manager
 on:
     workflow_call:
         inputs:
-            pnpm_allow_build:
+            pnpm_config_allow_build:
                 required: false
                 description: The value to use for `--allow-build` when installing with pnpm.
-                default: ''
                 type: string
 
 jobs:
@@ -133,23 +132,15 @@ jobs:
               with:
                   node-version: "lts/*"
 
-            - name: pnpm add without allow builds
-              if: ${{ inputs.pnpm_allow_build == '' }}
+            - name: pnpm add
               run: |
                   cat > .npmrc <<EOT
                   auto-install-peers=true
                   node-linker=hoisted
                   EOT
                   pnpm add ./*.tgz -D
-
-            - name: pnpm add with allow builds
-              if: ${{ inputs.pnpm_allow_build != '' }}
-              run: |
-                  cat > .npmrc <<EOT
-                  auto-install-peers=true
-                  node-linker=hoisted
-                  EOT
-                  pnpm add --allow-build=${{ inputs.pnpm_allow_build }} ./*.tgz -D
+              env:
+                  PNPM_CONFIG_ALLOW_BUILD: ${{ inputs.pnpm_config_allow_build }}
 
     bun-install:
         needs: build-tarball
