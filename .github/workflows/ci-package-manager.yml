@@ -102,6 +102,14 @@ jobs:
               run: |
                   corepack use yarn@latest
                   yarn init -p
+                  yarn config set npmPreapprovedPackages --json '[
+                    "@eslint/*",
+                    "eslint",
+                    "eslint-config-eslint",
+                    "eslint-scope",
+                    "eslint-visitor-keys",
+                    "espree"
+                  ]'
                   yarn add ./*.tgz -D
               env:
                   YARN_ENABLE_IMMUTABLE_INSTALLS: 0 # Allow installs to modify lockfile
