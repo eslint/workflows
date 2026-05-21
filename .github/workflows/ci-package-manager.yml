@@ -133,6 +133,7 @@ jobs:
                   auto-install-peers=true
                   node-linker=hoisted
                   EOT
+                  pnpm approve-builds --all
                   pnpm add ./*.tgz -D
 
     bun-install:
