@@ -26,7 +26,7 @@ jobs:
               uses: actions/checkout@v7
 
             - name: Set up Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: "lts/*"
 
@@ -55,7 +55,7 @@ jobs:
                   name: build
 
             - name: Set up Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: "lts/*"
 
@@ -75,7 +75,7 @@ jobs:
                   name: build
 
             - name: Set up Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: "lts/*"
 
@@ -95,7 +95,7 @@ jobs:
                   name: build
 
             - name: Set up Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: "lts/*"
 
@@ -137,7 +137,7 @@ jobs:
                   version: latest
 
             - name: Set up Node.js
-              uses: actions/setup-node@v6
+              uses: actions/setup-node@v7
               with:
                   node-version: "lts/*"
 
