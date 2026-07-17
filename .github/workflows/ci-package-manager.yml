@@ -17,6 +17,9 @@ on:
                 default: ''
                 type: string
 
+permissions:
+    contents: read
+
 jobs:
     build-tarball:
         runs-on: ubuntu-latest
