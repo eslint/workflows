@@ -4,10 +4,12 @@ on:
     schedule:
         - cron: "31 22 * * *" # Runs every day at 10:31 PM UTC
 
+    workflow_dispatch:
+
     workflow_call:
         secrets:
             token:
-                required: true
+                required: false
                 description: GitHub token to use for the workflow
 
 jobs:
@@ -22,7 +24,7 @@ jobs:
             - name: Mark stale issues and pull requests
               uses: actions/stale@v10
               with:
-                  repo-token: ${{ secrets.token }}
+                  repo-token: ${{ secrets.token || secrets.GITHUB_TOKEN }}
                   days-before-issue-stale: 30
                   days-before-pr-stale: 10
                   days-before-close: 7
