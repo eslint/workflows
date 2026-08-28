@@ -11,6 +11,9 @@
   // https://docs.npmjs.com/policies/unpublish/#packages-published-less-than-72-hours-ago
   minimumReleaseAge: "7 days",
 
+  // Use GitHub's native auto-merge instead of Renovate's built-in automerge
+  platformAutomerge: true,
+
   packageRules: [
     {
       description: "Use the deps:actions label for github-action manager updates (this means Renovate's github-action manager).",
